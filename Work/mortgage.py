@@ -23,11 +23,9 @@ while principal > 0:
         total_paid += principal
         principal = 0
 
-    print(month, round(total_paid,2), round(principal,2))
+    print(f'{month:3d} {round(total_paid,2):10.2f} {round(principal,2):10.2f}')
     month += 1
 
-
- 
 
 print('Total paid', total_paid)
 print('Months', month-1)
