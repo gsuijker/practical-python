@@ -3,34 +3,43 @@
 # Exercise 1.27
 import sys
 import csv
+import report
 
 def portfolio_cost(filename):
 
-    total_cost = 0
+    '''
+    Computes the total cost (shares*price) of a portfolio file
+    '''
+    portfolio = report.read_portfolio(filename)
+    return sum([s['shares'] *s['price'] for s in portfolio])
 
-    f = open(filename, 'rt')
-    rows = csv.reader(f)
-    headers = next(rows)
+    # total_cost = 0
 
-    for rowno, row in enumerate(rows, start=1):
-        record = dict(zip(headers, row))
-        try:
-            nshares = int(record['shares'])
-            price = float(record['price'])
-            total_cost += nshares * price
-        except ValueError:
-            print(f'Row {rowno}: Bad row:{row}')          
+    # f = open(filename, 'rt')
+    # rows = csv.reader(f)
+    # headers = next(rows)
+
+    # for rowno, row in enumerate(rows, start=1):
+    #     record = dict(zip(headers, row))
+    #     try:
+    #         nshares = int(record['shares'])
+    #         price = float(record['price'])
+    #         total_cost += nshares * price
+    #     except ValueError:
+    #         print(f'Row {rowno}: Bad row:{row}')          
     
-    f.close()
+    # f.close()
 
-    return total_cost
+    # return total_cost
 
-if len(sys.argv) == 2:
-    filename = sys.argv[1]
-else:
-    filename = 'Data/portfolio.csv'
+def main(args):
+    if len(args) != 2:
+        raise SystemExit(f'Usage: {args[0]} portfoliofile')
+    filename = args[1]
+    cost = portfolio_cost(filename)
+    print('Total cost:', cost)
 
-cost = portfolio_cost(filename)
-print('Total cost:', cost)
+if __name__ == '__main__':
+    main(sys.argv)
 
 
