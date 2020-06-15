@@ -5,8 +5,10 @@ import csv
 from collections import Counter
 import fileparse
 import sys
-import stock
+from stock import Stock
 import tableformat
+from portfolio import Portfolio
+
 
 def read_portfolio(filename):
     '''
@@ -15,7 +17,8 @@ def read_portfolio(filename):
     '''
     with open(filename) as lines:
         portdicts = fileparse.parse_csv(lines, select=['name','shares', 'price'], types=[str,int,float])
-        return [stock.Stock(d['name'], d['shares'], d['price']) for d in portdicts]
+        portfolio = [Stock(d['name'], d['shares'], d['price']) for d in portdicts]
+        return Portfolio(portfolio)
 
     # portfolio = []
     # with open(filename) as f:
