@@ -1,8 +1,9 @@
 from typedproperty import String, Integer, Float
 
 class Stock:
-
-    # __slots__ = ('name', '_shares','price')
+    '''
+    An instance of a stock holding consisting of name, shares and price.
+    '''
 
     name = String('name')
     shares = Integer('shares')

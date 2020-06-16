@@ -16,12 +16,13 @@ def read_portfolio(filename, **opts):
     name, shares, and price.
     '''
     with open(filename) as lines:
-        portdicts = fileparse.parse_csv(lines,
-                                        select=['name','shares', 'price'], 
-                                        types=[str,int,float], 
-                                        **opts)
-        portfolio = [Stock(**d) for d in portdicts]
-        return Portfolio(portfolio)
+        return Portfolio.from_csv(lines, **opts)
+        # portdicts = fileparse.parse_csv(lines,
+        #                                 select=['name','shares', 'price'], 
+        #                                 types=[str,int,float], 
+        #                                 **opts)
+        # portfolio = [Stock(**d) for d in portdicts]
+        # return Portfolio(portfolio)
 
     # portfolio = []
     # with open(filename) as f:
@@ -114,6 +115,12 @@ def main(args):
     portfolio_report(args[1], args[2], args[3])
 
 if __name__ == '__main__':
+    import logging
+    logging.basicConfig(
+        filename = 'app.log',
+        filemode = 'w',
+        level = logging.DEBUG
+    )
     main(sys.argv)
 
 
