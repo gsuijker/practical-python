@@ -3,11 +3,11 @@
 # Exercise 2.4
 import csv
 from collections import Counter
-import fileparse
+from . import fileparse
 import sys
-from stock import Stock
-import tableformat
-from portfolio import Portfolio
+from .stock import Stock
+from . import tableformat
+from .portfolio import Portfolio
 
 
 def read_portfolio(filename, **opts):
